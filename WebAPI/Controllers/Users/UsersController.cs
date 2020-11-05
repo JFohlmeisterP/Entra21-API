@@ -11,11 +11,15 @@ namespace WebAPI.Controllers
         private static readonly List<Usuario> Usuarios = new List<Usuario>();
 
         [HttpPost]
-        public Profile Post(CreateUserRequest userRequest)
+        public IActionResult Post(CreateUserRequest userRequest)
         {
+            if(userRequest.Profile == Profile.CBF && userRequest.Password != "admin123")
+            {    
+                return Unauthorized();
+            }
+
             var user = new Usuario(userRequest.Name, userRequest.Profile);
-            Usuarios.Add(user);
-            return user.Profile;
+            return Ok(user.Id);
         }
 
         [HttpGet]
