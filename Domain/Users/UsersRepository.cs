@@ -5,9 +5,9 @@ namespace Domain.Users
 {
     class UsersRepository
     {
-        private List<User> _users { get; set; }
+        private static List<User> _users = new List<User>();
 
-        public IReadOnlyCollection<User> Users => _users;
+        public static IReadOnlyCollection<User> Users => _users;
 
         public void Add(User user)
         {
