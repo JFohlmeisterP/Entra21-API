@@ -22,6 +22,8 @@ namespace WebAPI.Controllers.Users
                 return Unauthorized();
             }
 
+            //return BadRequest("Nome de usuário inválido!");
+
             var userId = _usersService.Create(userRequest.Name, userRequest.Profile);
             return Ok(userId);
         }
