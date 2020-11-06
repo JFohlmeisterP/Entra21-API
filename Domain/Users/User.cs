@@ -1,16 +1,16 @@
 using System;
 
-namespace Domain
+namespace Domain.Users
 {
-    public class Usuario
+    public class User
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public string Nome { get; set; }
+        public string Name { get; set; }
         public Profile Profile { get; set; }      
 
-        public Usuario(string nome, Profile profile)
+        public User(string name, Profile profile)
         {
-            Nome = nome;
+            Name = name;
             Profile = profile;
         }
 
