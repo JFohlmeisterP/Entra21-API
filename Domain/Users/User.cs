@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace Domain.Users
 {
@@ -12,6 +13,38 @@ namespace Domain.Users
         {
             Name = name;
             Profile = profile;
+        }
+        public bool Validate()
+        {
+
+            bool isValid = true;
+
+            if (string.IsNullOrEmpty(Name))
+            {
+                return !isValid;
+            }
+
+            var name = Name;
+
+            for (var i = 0; i < name.Length; i++)
+            {
+                var charInName = name[i];
+                if (charInName.Equals(" "))
+                {
+                    return !isValid;
+                }
+            }
+            
+            if (!name.All(char.IsLetter))
+            {
+                return !isValid;
+            }
+            else if (!name.All(char.IsNumber))
+            {
+                return !isValid;
+            }
+
+            return !isValid;
         }
 
     }
