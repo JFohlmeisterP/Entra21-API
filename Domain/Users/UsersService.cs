@@ -1,15 +1,21 @@
-using System;
+using System.Collections.Generic;
 
 namespace Domain.Users
 {
     public class UsersService
     {
-        public Guid Create(string name, Profile profile)
+        public CreatedUserDTO Create(string name, Profile profile)
         {
             var user = new User(name, profile);
-            
-            return user.Id;
-        }
+            var userValidation = user.Validate();
 
+            if (userValidation.isValid)
+            {
+                UsersRepository.Add(user);
+                return new CreatedUserDTO(user.Id);
+            }
+
+            return new CreatedUserDTO(userValidation.errors);
+        }
     }
 }

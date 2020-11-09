@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Domain.Users
@@ -14,37 +15,44 @@ namespace Domain.Users
             Name = name;
             Profile = profile;
         }
-        public bool Validate()
+
+        private bool ValidateName()
         {
-
-            bool isValid = true;
-
             if (string.IsNullOrEmpty(Name))
             {
-                return !isValid;
+                return false;
             }
 
-            var name = Name;
-
-            for (var i = 0; i < name.Length; i++)
+            var words = Name.Split(' ');
+            if (words.Length < 2)
             {
-                var charInName = name[i];
-                if (charInName.Equals(" "))
+                return false;
+            }
+
+            foreach (var word in words)
+            {
+                if (word.Trim().Length < 2)
                 {
-                    return !isValid;
+                    return false;
+                }
+                if (word.Any(x => !char.IsLetter(x)))
+                {
+                    return false;
                 }
             }
-            
-            if (!name.All(char.IsLetter))
+
+            return true;
+        }
+    
+        public (IList<string> errors, bool isValid) Validate()
+        {
+            var errors = new List<string>();
+            if (!ValidateName())
             {
-                return !isValid;
-            }
-            else if (!name.All(char.IsNumber))
-            {
-                return !isValid;
+                errors.Add("Nome inválido.");
             }
 
-            return !isValid;
+            return (errors, errors.Count == 0);
         }
 
     }

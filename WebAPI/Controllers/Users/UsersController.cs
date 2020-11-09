@@ -18,14 +18,18 @@ namespace WebAPI.Controllers.Users
         public IActionResult Post(CreateUserRequest userRequest)
         {
             if(userRequest.Profile == Domain.Profile.CBF && userRequest.Password != "admin123")
-            {    
+            {
                 return Unauthorized();
             }
+            
+            var response = _usersService.Create(userRequest.Name, userRequest.Profile);
 
-            //return BadRequest("Nome de usuário inválido!");
-
-            var userId = _usersService.Create(userRequest.Name, userRequest.Profile);
-            return Ok(userId);
+            if (!response.IsValid)
+            {
+                return BadRequest(response.Errors);
+            }
+            
+            return Ok(response.Id);
         }
         
     }
