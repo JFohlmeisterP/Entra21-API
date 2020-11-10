@@ -21,7 +21,7 @@ namespace WebAPI.Controllers.Users
             {
                 return Unauthorized();
             }
-            
+
             var response = _usersService.Create(userRequest.Name, userRequest.Profile);
 
             if (!response.IsValid)

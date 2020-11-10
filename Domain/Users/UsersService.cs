@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain.Users
 {
@@ -16,6 +18,11 @@ namespace Domain.Users
             }
 
             return new CreatedUserDTO(userValidation.errors);
+        }
+
+        public User GetById(Guid id)
+        {
+            return UsersRepository.Users.FirstOrDefault(x => x.Id == id);
         }
     }
 }
