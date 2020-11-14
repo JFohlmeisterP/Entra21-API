@@ -30,7 +30,7 @@ namespace WebAPI.Controllers.Players
                 return Unauthorized();
             }
 
-            var user = _usersService.GetById(Guid.Parse(userId));
+            var user = _usersService.GetByID(Guid.Parse(userId));
 
             if (user == null)
             {
@@ -40,7 +40,7 @@ namespace WebAPI.Controllers.Players
             if (user.Profile == Profile.Supporter)
             {
                 return Unauthorized();
-                // return Forbid("Test");
+                // return Forbid("Teste");
             }
 
             var response = _playersService.Create(request.Name);
