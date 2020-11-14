@@ -41,7 +41,7 @@ namespace WebAPI.Controllers.Users
                 return Unauthorized();
             }
 
-            var response = _usersService.Create(userRequest.Name, userRequest.Profile);
+            var response = _usersService.Update(userRequest.Name, userRequest.Profile);
 
             if (!response.IsValid)
             {
