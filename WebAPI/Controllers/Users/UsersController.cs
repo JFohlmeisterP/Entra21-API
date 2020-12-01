@@ -32,7 +32,7 @@ namespace WebAPI.Controllers.Users
             return Ok(response.Id);
         }
 
-        [HttpPut("{name}")]
+        [HttpPut("{Id}")]
         public IActionResult Put(CreateUserRequest userRequest)
         {
             if(userRequest.Profile == Domain.Profile.CBF && userRequest.Password != "admin123")
